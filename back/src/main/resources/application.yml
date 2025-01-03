@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: camping_info_edu
+  datasource:
+    url: jdbc:postgresql://localhost:5432/camping_site_information
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+    dialect: org.hibernate.dialect.PostgreSQLDialect
+
+mybatis:
+  mapper-locations: classpath:mappers/ObjectDataMapper.xml
+server:
+  port: 8080

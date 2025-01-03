@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wavus.edu.gis.camping_info.mapper.CampingInfoMapper">
+
+    <select id="findById" resultType="com.wavus.edu.gis.camping_info.vo.CampingOriginalSiteVo">
+        SELECT
+            id,
+            facility_name AS facilityName,
+            category,
+            city_province_name AS cityProvinceName,
+            city_county_district_name AS cityCountyDistrictName,
+            administrative_area_name AS administrativeAreaName,
+            ri_name AS riName,
+            street_address AS streetAddress,
+            road_name AS roadName,
+            building_number AS buildingNumber,
+            latitude,
+            longitude,
+            postal_code AS postalCode,
+            street_name_address AS streetNameAddress,
+            full_street_address AS fullStreetAddress,
+            telephone_number AS telephoneNumber,
+            website,
+            business_entity AS businessEntity,
+            operate_weekdays_yn AS operateWeekdaysYn,
+            operate_weekends_yn AS operateWeekendsYn,
+            operate_spring_yn AS operateSpringYn,
+            operate_summer_yn AS operateSummerYn,
+            operate_fall_yn AS operateFallYn,
+            operate_winter_yn AS operateWinterYn,
+            electricity_auxiliary_facilities_yn AS electricityAuxiliaryFacilitiesYn,
+            hot_water_auxiliary_facilities_yn AS hotWaterAuxiliaryFacilitiesYn,
+            wireless_internet_auxiliary_facilities_yn AS wirelessInternetAuxiliaryFacilitiesYn,
+            firewood_sales_auxiliary_facilities_yn AS firewoodSalesAuxiliaryFacilitiesYn,
+            promenade_auxiliary_facilities_yn AS promenadeAuxiliaryFacilitiesYn,
+            water_park_auxiliary_facilities_yn AS waterParkAuxiliaryFacilitiesYn,
+            playground_auxiliary_facilities_yn AS playgroundAuxiliaryFacilitiesYn,
+            mart_auxiliary_facilities_yn AS martAuxiliaryFacilitiesYn,
+            restrooms_auxiliary_facilities AS restroomsAuxiliaryFacilities,
+            shower_rooms_auxiliary_facilities AS showerRoomsAuxiliaryFacilities,
+            sinks_auxiliary_facilities AS sinksAuxiliaryFacilities,
+            fire_extinguishers_auxiliary_facilities AS fireExtinguishersAuxiliaryFacilities,
+            fishing_nearby_facilities_yn AS fishingNearbyFacilitiesYn,
+            promenade_nearby_facilities_yn AS promenadeNearbyFacilitiesYn,
+            water_play_sea_bathing_nearby_facilities_yn AS waterPlaySeaBathingNearbyFacilitiesYn,
+            water_play_sea_leisure_nearby_facilities_yn AS waterPlaySeaLeisureNearbyFacilitiesYn,
+            water_play_valley_nearby_facilities_yn AS waterPlayValleyNearbyFacilitiesYn,
+            water_play_river_nearby_facilities_yn AS waterPlayRiverNearbyFacilitiesYn,
+            water_play_pool_nearby_facilities_yn AS waterPlayPoolNearbyFacilitiesYn,
+            youth_experience_facility_nearby_facilities_yn AS youthExperienceFacilityNearbyFacilitiesYn,
+            rural_experience_facility_nearby_facilities_yn AS ruralExperienceFacilityNearbyFacilitiesYn,
+            childrens_play_facility_nearby_facilities_yn AS childrensPlayFacilityNearbyFacilitiesYn,
+            glamping_bed_yn AS glampingBedYn,
+            glamping_tv_yn AS glampingTvYn,
+            glamping_refrigerator_yn AS glampingRefrigeratorYn,
+            glamping_internet_wired_wireless_yn AS glampingInternetWiredWirelessYn,
+            glamping_interior_restroom_yn AS glampingInteriorRestroomYn,
+            glamping_air_conditioner_yn AS glampingAirConditionerYn,
+            glamping_heating_equipment_yn AS glampingHeatingEquipmentYn,
+            glamping_cooking_utensils_yn AS glampingCookingUtensilsYn,
+            facility_features AS facilityFeatures,
+            facility_introduction AS facilityIntroduction,
+            last_written_date AS lastWrittenDate
+        FROM camping_original_sites
+        WHERE id = #{id}
+            LIMIT 1
+    </select>
+</mapper>
