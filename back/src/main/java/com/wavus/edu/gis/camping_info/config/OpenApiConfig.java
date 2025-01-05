@@ -15,6 +15,7 @@ import io.swagger.v3.oas.annotations.info.License;
                         email = "dwseo96@wavus.co.kr"
                 )
         )
-)public class OpenApiConfig {
+)
+public class OpenApiConfig {
     
 }
