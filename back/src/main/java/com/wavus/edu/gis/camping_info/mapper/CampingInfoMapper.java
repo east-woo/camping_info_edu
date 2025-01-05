@@ -12,12 +12,8 @@ public interface CampingInfoMapper {
     // ID로 검색
     Optional<CampingOriginalSiteVo> findById(Long id);
 
-    // City Province Name으로 검색
-    List<CampingOriginalSiteVo> findByCityProvinceName(String cityProvinceName);
-
-    // City County District Name으로 검색
-    List<CampingOriginalSiteVo> findByCityCountyDistrictName(String cityCountyDistrictName);
+    List<CampingOriginalSiteVo> findByRegion(Integer ctprvnCd, Integer sigCd);
 
     // Facility Name으로 검색 (포함 검색)
-    List<CampingOriginalSiteVo> findByFacilityNameContaining(String facilityName);
+    List<CampingOriginalSiteVo> findByFacilityName(String facilityName);
 }

@@ -1,6 +1,9 @@
 spring:
   application:
     name: camping_info_edu
+  output:
+    ansi:
+      enabled: ALWAYS
   datasource:
     url: jdbc:postgresql://localhost:5432/camping_site_information
     username: postgres
@@ -9,6 +12,18 @@ spring:
     dialect: org.hibernate.dialect.PostgreSQLDialect
 
 mybatis:
-  mapper-locations: classpath:mappers/ObjectDataMapper.xml
+  mapper-locations: classpath:mappers/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
 server:
   port: 8080
+
+
+logging:
+  level:
+    root: INFO
+    com.wavus.edu.gis: DEBUG # 패키지에 맞게 변경
+    org.mybatis: DEBUG
+    org.springframework.jdbc.core: DEBUG
+    org.apache.ibatis.logging: DEBUG
+
