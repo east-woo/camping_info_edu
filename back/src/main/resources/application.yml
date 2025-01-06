@@ -5,7 +5,7 @@ spring:
     ansi:
       enabled: ALWAYS
   datasource:
-    url: jdbc:postgresql://localhost:5432/camping_site_information
+    url: jdbc:postgresql://localhost:5432/camping_information_edu
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
