@@ -10,7 +10,9 @@
 <body>
     <!-- Full-screen map container -->
     <div id="map"></div>
-
+    <div>
+        <button id="toggleLayerButton">시군구 레이어 켜기/끄기</button>
+    </div>
     <!-- Search form container -->
 <!-- Search form container -->
 <div class="container">
@@ -46,13 +48,17 @@
         <button id="nameSearchButton">검색</button>
     </div>
 
-    <div id="campingSiteModal" style="display: none;">
-        <div id="modalContent">
-        <!-- Content will be populated dynamically -->
+
+    <!-- 지도 위에 표시될 팝업 -->
+    <div id="mapPop" class="mapPop">
+        <button id="popupCloseButton">X</button>
+        <div class="mapPopContent">
+            <header>상세 정보</header>
+            <div class="popBody">
+                <!-- 상세 정보가 여기에 채워집니다 -->
+            </div>
         </div>
-        <button id="closeModalButton">Close</button>
     </div>
-    <!-- Display the search results -->
     <div id="result"></div>
 </div>
 

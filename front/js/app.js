@@ -9,11 +9,17 @@ import VectorLayer from 'ol/layer/Vector'; // Correct import for VectorLayer
 import VectorSource from 'ol/source/Vector'; // Correct import for VectorSource 
 import { Icon, Style } from 'ol/style'; // OpenLayers styles for customizing markers 
 import { Point } from 'ol/geom';
+import Overlay from 'ol/Overlay';
+import TileWMS from 'ol/source/TileWMS';
+
 
 let map; // 맵 객체를 전역에서 정의
+let eduPop; // 팝업 오버레이 객체를 전역에서 정의
 
 // OpenLayers 맵 초기화 함수
 function initMap() {
+
+
   map = new Map({
     target: 'map',
     layers: [
@@ -26,6 +32,45 @@ function initMap() {
       zoom: 10,
     }),
   });
+
+  // 팝업 오버레이 등록
+  eduPop = new Overlay({
+    element: document.querySelector('#mapPop'),
+    autoPan: true,
+    autoPanAnimation: {
+      duration: 250,
+    },
+  });
+
+
+  //시군구 레이어 등록
+  const eduSource = new TileWMS({
+    url: 'http://localhost:8080/geoserver/wms',
+    params: { 'LAYERS': 'ne:ctp_rvn', 'TILED': true },
+    serverType: 'geoserver',
+  })
+
+  const eduLayer = new TileLayer({
+    source: eduSource,
+  });
+
+  map.addLayer(eduLayer);
+
+  // 레이어 On/Off 기능
+  const toggleLayerButton = document.getElementById('toggleLayerButton');
+  let isLayerVisible = true; // 레이어가 처음에 보이도록 설정
+
+  toggleLayerButton.addEventListener('click', () => {
+    if (isLayerVisible) {
+      map.removeLayer(eduLayer);
+      toggleLayerButton.textContent = '시군구 레이어 켜기';
+    } else {
+      map.addLayer(eduLayer);
+      toggleLayerButton.textContent = '시군구 레이어 끄기';
+    }
+    isLayerVisible = !isLayerVisible; // 상태 토글
+  });
+  map.addOverlay(eduPop);
 }
 
 // 시도 목록 가져오기 (city/province codes)
@@ -51,20 +96,20 @@ function fetchCampingSiteDetails(siteId) {
       .then(response => response.json())
       .then(data => {
         // Open modal with detailed information about the selected camping site
-        openCampingSiteModal(data);
+        openCampingSitePopup(data);
       })
       .catch(error => {
         console.error('Error fetching camping site details:', error);
       });
   }
-  
-// 캠핑장 상세 정보 모달 열기
-  function openCampingSiteModal(site) {
-    const modal = document.getElementById('campingSiteModal');
-    const modalContent = document.getElementById('modalContent');
-  
-  // 모달에 캠핑장 상세 정보 채우기
-  modalContent.innerHTML = `
+
+// 캠핑장 상세 정보 팝업 열기
+function openCampingSitePopup(site) {
+  const popupContent = document.querySelector('.mapPopContent .popBody');
+  const popup = document.getElementById('mapPop');
+  const coordinates = fromLonLat([site.longitude, site.latitude]);
+  // 팝업에 캠핑장 상세 정보 채우기
+  popupContent.innerHTML = `
     <h3>${site.facilityName}</h3>
     <p><strong>카테고리:</strong> ${site.category}</p>
     <p><strong>주소:</strong> ${site.streetAddress}</p>
@@ -73,15 +118,22 @@ function fetchCampingSiteDetails(siteId) {
     <p><strong>운영 시즌:</strong> ${getOperatingSeasons(site)}</p>
     <p><strong>시설:</strong> ${getAuxiliaryFacilities(site)}</p>
     <p><strong>근처 명소:</strong> ${getNearbyFacilities(site)}</p>
+    <p><strong>시설 특징</strong>:</strong> ${site.facilityFeatures}</p>
+    <p><strong>시설 소개</strong>:</strong> ${site.facilityIntroduction}</p>
   `;
-  
-    modal.style.display = 'block';
-  
-    document.getElementById('closeModalButton').addEventListener('click', () => {
-      modal.style.display = 'none'; // Close modal
-    });
-  }
-  
+
+  // 팝업 위치 설정 및 표시
+  eduPop.setPosition(coordinates);
+  popup.style.display = 'block';
+
+  // 팝업 닫기 버튼 이벤트
+  document.getElementById('popupCloseButton').addEventListener('click', () => {
+    eduPop.setPosition(undefined); // 팝업 닫기
+    popup.style.display = 'none';
+  });
+}
+
+
 // 운영 시즌, 보조 시설, 근처 명소를 가져오는 헬퍼 함수들
 function getOperatingSeasons(site) {
     const seasons = [];
@@ -259,17 +311,22 @@ function setupEventListeners() {
   document.getElementById('regionSearchButton').addEventListener('click', () => {
     const ctprvnCd = document.getElementById('cityCode').value;
     const sigCd = document.getElementById('districtCode').value;
+    if(ctprvnCd == '' && sigCd ==''){
+      return alert("시도를 선택하여 주세요");
+    }
     fetchCampingSites(ctprvnCd, sigCd).then(displayCampingSites);
   });
 
   document.getElementById('nameSearchButton').addEventListener('click', () => {
     const facilityName = document.getElementById('facilityName').value;
-    const url = `http://localhost:8080/api/camping-info/name?facilityName=${encodeURIComponent(facilityName)}`;
+    const url = `http://localhost:8081/api/camping-info/name?facilityName=${encodeURIComponent(facilityName)}`;
     fetch(url)
       .then((response) => response.json())
       .then(displayCampingSites)
       .catch((error) => console.error('Error fetching camping sites by name:', error));
   });
+
+
 }
 
 
