@@ -8,17 +8,20 @@
     <script type="module" src="./js/app.js" defer></script>
 </head>
 <body>
-    <!-- Full-screen map container -->
+
     <div id="map"></div>
+
     <div>
-        <button id="toggleLayerButton">시군구 레이어 켜기/끄기</button>
+        <button id="toggleLayerButton">시도 레이어 켜기/끄기</button>
     </div>
-    <!-- Search form container -->
-<!-- Search form container -->
+
+    <div>
+        <button id="toggleLayerButton2">시군구 레이어 켜기/끄기</button>
+    </div>
+
 <div class="container">
     <h1>캠핑장 정보 검색</h1>
     
-    <!-- Tabs for search options -->
     <div id="searchTabs">
         <label>
             <input type="radio" name="searchType" value="region" checked> 지역으로 검색
@@ -28,7 +31,6 @@
         </label>
     </div>
     
-    <!-- Region-based search form -->
     <div id="regionSearch" class="tab-content">
         <label for="cityCode">시도:</label>
         <select id="cityCode">
@@ -41,7 +43,6 @@
         <button id="regionSearchButton">캠핑장 검색</button>
     </div>
     
-    <!-- Name-based search form -->
     <div id="nameSearch" class="tab-content" style="display: none;">
         <label for="facilityName">캠핑장 이름:</label>
         <input type="text" id="facilityName" placeholder="캠핑장 이름 입력">

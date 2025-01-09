@@ -46,12 +46,13 @@ function initMap() {
   //시군구 레이어 등록
   const eduSource = new TileWMS({
     url: 'http://localhost:8080/geoserver/wms',
-    params: { 'LAYERS': 'ne:ctp_rvn', 'TILED': true },
+    params: { 'LAYERS': 'wavus:ctp_rvn', 'TILED': true },
     serverType: 'geoserver',
   })
 
   const eduLayer = new TileLayer({
     source: eduSource,
+    zIndex:0,
   });
 
   map.addLayer(eduLayer);
@@ -63,19 +64,36 @@ function initMap() {
   toggleLayerButton.addEventListener('click', () => {
     if (isLayerVisible) {
       map.removeLayer(eduLayer);
-      toggleLayerButton.textContent = '시군구 레이어 켜기';
+      toggleLayerButton.textContent = '시도 레이어 켜기';
     } else {
       map.addLayer(eduLayer);
-      toggleLayerButton.textContent = '시군구 레이어 끄기';
+      toggleLayerButton.textContent = '시도 레이어 끄기';
     }
     isLayerVisible = !isLayerVisible; // 상태 토글
   });
+
+
+  // 레이어 On/Off 기능
+  const toggleLayerButton2 = document.getElementById('toggleLayerButton2');
+  let isLayerVisible2 = true; // 레이어가 처음에 보이도록 설정
+
+  toggleLayerButton2.addEventListener('click', () => {
+    if (isLayerVisible2) {
+      map.removeLayer(eduLayer);
+      toggleLayerButton2.textContent = '시군구 레이어 켜기';
+    } else {
+      map.addLayer(eduLayer);
+      toggleLayerButton2.textContent = '시군구 레이어 끄기';
+    }
+    isLayerVisible2 = !isLayerVisible2; // 상태 토글
+  });
+
   map.addOverlay(eduPop);
 }
 
 // 시도 목록 가져오기 (city/province codes)
 function fetchCtpRvnList() {
-  return fetch('http://localhost:8080/api/area-code/ctpRvn/list')
+  return fetch('http://52.78.107.97:4000/api/area-code/ctpRvn/list')
     .then((response) => response.json())
     .catch((error) => console.error('Error fetching city codes:', error));
 }
@@ -83,7 +101,7 @@ function fetchCtpRvnList() {
 // 선택된 시도 코드에 기반한 시군구 목록 가져오기 (district codes)
 function fetchSigList(ctprvnCd) {
   if (ctprvnCd) {
-    return fetch(`http://localhost:8080/api/area-code/sig/list?ctprvnCd=${ctprvnCd}`)
+    return fetch(`http://52.78.107.97:4000/api/area-code/sig/list?ctprvnCd=${ctprvnCd}`)
       .then((response) => response.json())
       .catch((error) => console.error('Error fetching district codes:', error));
   }
@@ -92,7 +110,7 @@ function fetchSigList(ctprvnCd) {
 
 // 캠핑장 상세 정보 가져오기
 function fetchCampingSiteDetails(siteId) {
-    fetch(`http://localhost:8080/api/camping-info/id?id=${siteId}`)
+    fetch(`http://52.78.107.97:4000/api/camping-info/id?id=${siteId}`)
       .then(response => response.json())
       .then(data => {
         // Open modal with detailed information about the selected camping site
@@ -119,7 +137,6 @@ function openCampingSitePopup(site) {
     <p><strong>시설:</strong> ${getAuxiliaryFacilities(site)}</p>
     <p><strong>근처 명소:</strong> ${getNearbyFacilities(site)}</p>
     <p><strong>시설 특징</strong>:</strong> ${site.facilityFeatures}</p>
-    <p><strong>시설 소개</strong>:</strong> ${site.facilityIntroduction}</p>
   `;
 
   // 팝업 위치 설정 및 표시
@@ -176,7 +193,7 @@ function getOperatingSeasons(site) {
 
 // 선택된 시도와 시군구 코드에 기반한 캠핑장 정보 가져오기
 function fetchCampingSites(ctprvnCd, sigCd) {
-  const url = `http://localhost:8080/api/camping-info/region?ctprvnCd=${ctprvnCd}&sigCd=${sigCd}`;
+  const url = `http://52.78.107.97:4000/api/camping-info/region?ctprvnCd=${ctprvnCd}&sigCd=${sigCd}`;
   return fetch(url)
     .then((response) => response.json())
     .catch((error) => console.error('Error fetching camping sites:', error));
@@ -245,10 +262,11 @@ function displayCampingSites(data) {
       source: vectorSource,
       style: new Style({
         image: new Icon({
-          src: 'https://cdn-icons-png.flaticon.com/512/64/64113.png', // Custom marker image
+          src: './images/camp.png', // Custom marker image
           scale: 0.1,
         }),
       }),
+      zIndex:100
     });
 
     map.addLayer(vectorLayer); 

@@ -149,7 +149,8 @@ button:hover {
 
 /* Close button */
 #popupCloseButton {
-    color: red;
+    width: 10%;
+    color: black;
     float: right;
     background: none;
     border: none;
@@ -189,24 +190,41 @@ button:hover {
 }
 
 /* Button hover effects */
-#toggleLayerButton:hover {
+#toggleLayerButton:hover, #toggleLayerButton2:hover {
     background-color: #0056b3;
     transform: scale(1.1);
 }
 
 /* Button active state */
-#toggleLayerButton:active {
+#toggleLayerButton:active, #toggleLayerButton2:active {
     background-color: #004085;
     transform: scale(1);
 }
 
 /* Optional: Add a shadow for better visibility on the map */
-#toggleLayerButton {
+#toggleLayerButton, #toggleLayerButton2 {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 /* Button text transitions */
-#toggleLayerButton {
+#toggleLayerButton, #toggleLayerButton2 {
     font-family: Arial, sans-serif;
     width: 15%;
+}
+
+/* Button styles */
+#toggleLayerButton2 {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 400px;
+    z-index: 9999;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
