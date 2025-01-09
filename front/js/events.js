@@ -1,6 +1,7 @@
-import {fetchCtpRvnList, fetchSigList, fetchCampingSiteDetails, fetchCampingSites, fetchCampingSiteByName} from './api';
-import { displayCampingSites } from './overlay';
-import { map, ctpRvnLayer } from './map';
+import {fetchCampingSiteByName, fetchCampingSiteDetails, fetchCampingSites, fetchSigList} from './api';
+import {displayCampingSites} from './overlay';
+import {ctpRvnLayer, map, removeCampingPop} from './map';
+import {fromLonLat} from "ol/proj";
 
 export function setupEventListeners() {
     document.querySelectorAll('input[name="searchType"]').forEach((radio) =>
@@ -31,8 +32,8 @@ export function setupEventListeners() {
         }
         fetchCampingSites(ctprvnCd, sigCd)
             .then((data) => {
-                console.log(data); // 데이터 확인
                 displayCampingSites(data);
+                removeCampingPop();
             })
     });
 
@@ -44,38 +45,39 @@ export function setupEventListeners() {
         fetchCampingSiteByName(facilityName)
             .then(displayCampingSites)
             .catch((error) => console.error('Error displaying camping sites:', error));
+        removeCampingPop();
     });
 
 
     // 레이어 On/Off 기능
-    const toggleLayerButton = document.getElementById('toggleLayerButton');
-    let isLayerVisible = true; // 레이어가 처음에 보이도록 설정
+    const ctpRvnLayerButton = document.getElementById('ctpRvnLayerButton');
+    let isCtpRvnLayerVisible = true; // 레이어가 처음에 보이도록 설정
 
-    toggleLayerButton.addEventListener('click', () => {
-        if (isLayerVisible) {
+    ctpRvnLayerButton.addEventListener('click', () => {
+        if (isCtpRvnLayerVisible) {
             map.removeLayer(ctpRvnLayer);
-            toggleLayerButton.textContent = '시도 레이어 켜기';
+            ctpRvnLayerButton.textContent = '시도 레이어 켜기';
         } else {
             map.addLayer(ctpRvnLayer);
-            toggleLayerButton.textContent = '시도 레이어 끄기';
+            ctpRvnLayerButton.textContent = '시도 레이어 끄기';
         }
-        isLayerVisible = !isLayerVisible; // 상태 토글
+        isCtpRvnLayerVisible = !isCtpRvnLayerVisible; // 상태 토글
     });
 
 
     // 레이어 On/Off 기능
-    const toggleLayerButton2 = document.getElementById('toggleLayerButton2');
-    let isLayerVisible2 = true; // 레이어가 처음에 보이도록 설정
+    const sigLayerButton = document.getElementById('sigLayerButton');
+    let isSigLayerVisible = true; // 레이어가 처음에 보이도록 설정
 
-    toggleLayerButton2.addEventListener('click', () => {
-        if (isLayerVisible2) {
+    sigLayerButton.addEventListener('click', () => {
+        if (isSigLayerVisible) {
             map.removeLayer(ctpRvnLayer);
-            toggleLayerButton2.textContent = '시군구 레이어 켜기';
+            sigLayerButton.textContent = '시군구 레이어 켜기';
         } else {
             map.addLayer(ctpRvnLayer);
-            toggleLayerButton2.textContent = '시군구 레이어 끄기';
+            sigLayerButton.textContent = '시군구 레이어 끄기';
         }
-        isLayerVisible2 = !isLayerVisible2; // 상태 토글
+        isSigLayerVisible = !isSigLayerVisible; // 상태 토글
     });
 
 }
@@ -92,4 +94,20 @@ function handleSearchTypeChange() {
         regionSearch.style.display = 'none';
         nameSearch.style.display = 'block';
     }
+}
+
+
+// "지도에서 보기" 버튼 클릭 시, 클릭한 캠핑장으로 이동하고 상세 정보를 가져오는 이벤트 리스너를 추가하는 함수
+export function addViewOnMapButtonEvent(siteDiv, site) {
+    siteDiv.querySelector('.viewOnMapButton').addEventListener('click', () => {
+        const lat = parseFloat(site.latitude);  // 위도
+        const lon = parseFloat(site.longitude); // 경도
+
+        // 선택된 캠핑장으로 지도 이동
+        map.getView().setCenter(fromLonLat([lon, lat]));
+        map.getView().setZoom(15); // 줌 레벨 설정
+
+        // 선택된 캠핑장에 대한 상세 정보를 가져옵니다.
+        fetchCampingSiteDetails(site.id);
+    });
 }

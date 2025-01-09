@@ -1,7 +1,7 @@
-import { openCampingSitePopup } from "./overlay";
+import {openCampingSitePopup} from "./overlay";
 
 const BASE_URL = process.env.PARCEL_BASE_URL;
-console.log('Base URL:', BASE_URL);
+
 
 // 시도 목록 가져오기 (city/province codes)
 export function fetchCtpRvnList() {

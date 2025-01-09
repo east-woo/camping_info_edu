@@ -173,7 +173,7 @@ button:hover {
 }
 
 /* Button styles */
-#toggleLayerButton {
+#ctpRvnLayerButton {
     background-color: #007bff;
     color: white;
     border: none;
@@ -190,30 +190,30 @@ button:hover {
 }
 
 /* Button hover effects */
-#toggleLayerButton:hover, #toggleLayerButton2:hover {
+#ctpRvnLayerButton:hover, #sigLayerButton:hover {
     background-color: #0056b3;
     transform: scale(1.1);
 }
 
 /* Button active state */
-#toggleLayerButton:active, #toggleLayerButton2:active {
+#ctpRvnLayerButton:active, #sigLayerButton:active {
     background-color: #004085;
     transform: scale(1);
 }
 
 /* Optional: Add a shadow for better visibility on the map */
-#toggleLayerButton, #toggleLayerButton2 {
+#ctpRvnLayerButton, #sigLayerButton {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 /* Button text transitions */
-#toggleLayerButton, #toggleLayerButton2 {
+#ctpRvnLayerButton, #sigLayerButton {
     font-family: Arial, sans-serif;
     width: 15%;
 }
 
 /* Button styles */
-#toggleLayerButton2 {
+#sigLayerButton {
     background-color: #007bff;
     color: white;
     border: none;
