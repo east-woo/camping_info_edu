@@ -1,5 +1,7 @@
 ## WAVUS 2025 신입사원 교육 (GIS 프로그래밍 - 실습 파트)
 
+- 교육자: 기술연구소 서동우
+
 ## 참고 사이트
 
 - openlayer example ⇒ https://openlayers.org/en/latest/examples/
