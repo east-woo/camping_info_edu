@@ -1,6 +1,6 @@
-import {openCampingSitePopup} from "./overlay";
+import {openCampingSitePopup} from "./overlay"; // 캠핑장 상세 정보를 표시하기 위한 팝업 관련 함수 가져오기
 
-const BASE_URL = process.env.PARCEL_BASE_URL;
+const BASE_URL = process.env.PARCEL_BASE_URL; // 환경 변수에서 BASE_URL 값을 가져옵니다.
 
 
 // 시도 목록 가져오기 (city/province codes)
@@ -13,6 +13,7 @@ export function fetchCtpRvnList() {
 // 선택된 시도 코드에 기반한 시군구 목록 가져오기 (district codes)
 export function fetchSigList(ctprvnCd) {
     if (ctprvnCd) {
+        // 해당 시도 코드에 맞는 시군구 목록을 API에서 가져옵니다.
         return fetch(`${BASE_URL}/api/area-code/sig/list?ctprvnCd=${ctprvnCd}`)
             .then((response) => response.json())
             .catch((error) => console.error('Error fetching district codes:', error));
@@ -22,6 +23,7 @@ export function fetchSigList(ctprvnCd) {
 
 // 캠핑장 상세 정보 가져오기
 export function fetchCampingSiteDetails(siteId) {
+    // 입력된 캠핑장 이름으로 캠핑장 정보를 검색합니다.
     fetch(`${BASE_URL}/api/camping-info/id?id=${siteId}`)
         .then(response => response.json())
         .then(data => {
