@@ -34,4 +34,4 @@
 
 ![시도_레이어_구현_실습.png](image/training_ctp.png)
 
-![시군구_레이어_구현_실습.png](image/training_ctp.png)
+![시군구_레이어_구현_실습.png](image/training_sig.png)
