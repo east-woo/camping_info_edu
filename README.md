@@ -26,3 +26,12 @@
 
 ![campingEduView3.png](image/campingEduView3.png)
 
+# 3. 실습
+# 실습
+
+## 📖 교육은 시도 레이어 발행 후 작업 하였지만,  시군구 레이어 발행까지 후, 화면 렌더링 까지 실습
+
+
+![시도_레이어_구현_실습.png](image/training_ctp.png)
+
+![시군구_레이어_구현_실습.png](image/training_ctp.png)
