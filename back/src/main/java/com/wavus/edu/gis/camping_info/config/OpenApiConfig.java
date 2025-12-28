@@ -7,7 +7,7 @@ import io.swagger.v3.oas.annotations.info.License;
 
 @OpenAPIDefinition(
         info = @Info(
-                title = "(2025 WAVUS GIS 프로그래밍 신입사원 교육) 캠핑장 정보 API",
+                title = "(2026 WAVUS GIS 프로그래밍 신입사원 교육) 캠핑장 정보 API",
                 version = "1.0.0",
                 description = "이 API는 캠핑장 정보, 시설, 편의시설 등을 관리하고 검색할 수 있도록 제공합니다.",
                 contact = @Contact(

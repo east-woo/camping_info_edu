@@ -22,8 +22,9 @@ server:
 logging:
   level:
     root: INFO
-    com.wavus.edu.gis: DEBUG # 패키지에 맞게 변경
+    com.wavus.edu.gis: DEBUG
     org.mybatis: DEBUG
     org.springframework.jdbc.core: DEBUG
     org.apache.ibatis.logging: DEBUG
-
+    org.springdoc: DEBUG
+    org.springframework.web: DEBUG

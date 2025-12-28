@@ -1,11 +1,15 @@
-package com.wavus.edu.gis.camping_info.controller;
+package com.wavus.edu.gis.camping_info.api.controller;
 
 import com.wavus.edu.gis.camping_info.service.AreaCodeService;
-import com.wavus.edu.gis.camping_info.vo.CtpRvnVo;
-import com.wavus.edu.gis.camping_info.vo.SigVo;
+import com.wavus.edu.gis.camping_info.domain.vo.CtpRvnVo;
+import com.wavus.edu.gis.camping_info.domain.vo.SigVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+
+
 import io.swagger.v3.oas.annotations.tags.Tag;
+
+import jakarta.validation.constraints.Size;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,8 +46,7 @@ public class AreaCodeController {
             description = "전체 시도 코드 목록을 조회합니다."
     )
     public ResponseEntity<List<CtpRvnVo>> getAllCtpRvn() {
-        List<CtpRvnVo> ctpRvnList = areaCodeService.getAllCtpRvn();
-        return ResponseEntity.ok(ctpRvnList);
+        return ResponseEntity.ok(areaCodeService.getAllCtpRvn());
     }
 
     @GetMapping("/sig/list")
@@ -53,9 +56,9 @@ public class AreaCodeController {
     )
     public ResponseEntity<List<SigVo>> getSigList(
             @RequestParam("ctprvnCd")
+            @Size(min = 2, max = 2, message = "시도 코드는 2자리여야 합니다.")
             @Parameter(description = "시도 코드", example = "11", required = true)
             String ctprvnCd) {
-        List<SigVo> sigList = areaCodeService.getSigList(ctprvnCd);
-        return ResponseEntity.ok(sigList);
+        return ResponseEntity.ok(areaCodeService.getSigList(ctprvnCd));
     }
 }

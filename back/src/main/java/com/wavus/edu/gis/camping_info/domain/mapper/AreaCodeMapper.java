@@ -1,7 +1,7 @@
-package com.wavus.edu.gis.camping_info.mapper;
+package com.wavus.edu.gis.camping_info.domain.mapper;
 
-import com.wavus.edu.gis.camping_info.vo.CtpRvnVo;
-import com.wavus.edu.gis.camping_info.vo.SigVo;
+import com.wavus.edu.gis.camping_info.domain.vo.CtpRvnVo;
+import com.wavus.edu.gis.camping_info.domain.vo.SigVo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

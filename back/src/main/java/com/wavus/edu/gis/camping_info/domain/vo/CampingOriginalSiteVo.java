@@ -1,4 +1,4 @@
-package com.wavus.edu.gis.camping_info.vo;
+package com.wavus.edu.gis.camping_info.domain.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;

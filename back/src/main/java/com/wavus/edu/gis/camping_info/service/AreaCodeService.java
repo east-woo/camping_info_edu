@@ -1,8 +1,10 @@
 package com.wavus.edu.gis.camping_info.service;
 
-import com.wavus.edu.gis.camping_info.mapper.AreaCodeMapper;
-import com.wavus.edu.gis.camping_info.vo.CtpRvnVo;
-import com.wavus.edu.gis.camping_info.vo.SigVo;
+import com.wavus.edu.gis.camping_info.support.error.ApiException;
+import com.wavus.edu.gis.camping_info.domain.mapper.AreaCodeMapper;
+import com.wavus.edu.gis.camping_info.domain.vo.CtpRvnVo;
+import com.wavus.edu.gis.camping_info.support.error.ErrorCode;
+import com.wavus.edu.gis.camping_info.domain.vo.SigVo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,8 +33,13 @@ public class AreaCodeService {
         return areaCodeMapper.findCtpRvnAll();
     }
 
-
     public List<SigVo> getSigList(String ctprvnCd) {
-        return areaCodeMapper.findSigList(ctprvnCd);
+        List<SigVo> result = areaCodeMapper.findSigList(ctprvnCd);
+
+        if (result.isEmpty()) {
+            throw new ApiException(ErrorCode.AREA_NOT_FOUND);
+        }
+
+        return result;
     }
 }

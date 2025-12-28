@@ -1,7 +1,7 @@
-package com.wavus.edu.gis.camping_info.controller;
+package com.wavus.edu.gis.camping_info.api.controller;
 
+import com.wavus.edu.gis.camping_info.domain.vo.CampingOriginalSiteVo;
 import com.wavus.edu.gis.camping_info.service.CampingInfoService;
-import com.wavus.edu.gis.camping_info.vo.CampingOriginalSiteVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
 @Tag(name = "camping information API", description = "캠핑장 정보 API")
 @RestController
 @RequestMapping("/api/camping-info")
@@ -29,7 +28,7 @@ public class CampingInfoController {
             summary = "캠핑장 ID로 조회",
             description = "주어진 캠핑장 아이디로 캠핑장 정보를 조회합니다."
     )
-    public ResponseEntity<Optional<CampingOriginalSiteVo>> searchById(
+    public ResponseEntity<CampingOriginalSiteVo> searchById(
             @RequestParam
             @Parameter(description = "캠핑장 아이디", example = "1", required = true)
             Long id) {

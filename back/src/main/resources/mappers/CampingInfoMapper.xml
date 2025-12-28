@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.wavus.edu.gis.camping_info.mapper.CampingInfoMapper">
+<mapper namespace="com.wavus.edu.gis.camping_info.domain.mapper.CampingInfoMapper">
 
-    <select id="findById" resultType="com.wavus.edu.gis.camping_info.vo.CampingOriginalSiteVo">
+    <select id="findById" resultType="com.wavus.edu.gis.camping_info.domain.vo.CampingOriginalSiteVo">
         SELECT
             id,
             facility_name,
@@ -65,7 +65,7 @@
         WHERE id = #{id}
     </select>
 
-    <select id="findByRegion" parameterType="map" resultType="com.wavus.edu.gis.camping_info.vo.CampingOriginalSiteVo">
+    <select id="findByRegion" parameterType="map" resultType="com.wavus.edu.gis.camping_info.domain.vo.CampingOriginalSiteVo">
         SELECT
         id,
         facility_name,
@@ -134,7 +134,7 @@
             </if>
     </select>
 
-    <select id="findByFacilityName" parameterType="java.lang.String" resultType="com.wavus.edu.gis.camping_info.vo.CampingOriginalSiteVo">
+    <select id="findByFacilityName" parameterType="java.lang.String" resultType="com.wavus.edu.gis.camping_info.domain.vo.CampingOriginalSiteVo">
         SELECT
             id,
             facility_name,
