@@ -24,7 +24,7 @@ class CampingInfoControllerTest {
     @DisplayName("캠핑장 ID 조회 성공")
     void findById_success() throws Exception {
 
-        mockMvc.perform(get("/api/camping-info/id")
+        mockMvc.perform(get("/camping-info/id")
                         .param("id", "1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").exists());
@@ -34,7 +34,7 @@ class CampingInfoControllerTest {
     @DisplayName("존재하지 않는 캠핑장 조회 시 NOT_FOUND 반환")
     void findById_notFound() throws Exception {
 
-        mockMvc.perform(get("/api/camping-info/id")
+        mockMvc.perform(get("/camping-info/id")
                         .param("id", "999999"))
                 .andExpect(status().isNotFound());
     }
@@ -43,7 +43,7 @@ class CampingInfoControllerTest {
     @DisplayName("지역 검색 성공")
     void findByRegion_success() throws Exception {
 
-        mockMvc.perform(get("/api/camping-info/region")
+        mockMvc.perform(get("/camping-info/region")
                         .param("ctprvnCd", "11"))
                 .andExpect(status().isOk());
     }
@@ -52,7 +52,7 @@ class CampingInfoControllerTest {
     @DisplayName("지역코드 없을 때 BAD_REQUEST 반환")
     void findByRegion_badRequest() throws Exception {
 
-        mockMvc.perform(get("/api/camping-info/region"))
+        mockMvc.perform(get("/camping-info/region"))
                 .andExpect(status().isBadRequest());
     }
 }

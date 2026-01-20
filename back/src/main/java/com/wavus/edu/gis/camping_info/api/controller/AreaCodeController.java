@@ -31,7 +31,7 @@ import java.util.List;
  */
 @Tag(name = "area code API", description = "시도, 시군구 코드 API")
 @RestController
-@RequestMapping("/api/area-code")
+@RequestMapping("/area-code")
 public class AreaCodeController {
 
     private final AreaCodeService areaCodeService;

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 @Tag(name = "camping information API", description = "캠핑장 정보 API")
 @RestController
-@RequestMapping("/api/camping-info")
+@RequestMapping("/camping-info")
 public class CampingInfoController {
 
     private CampingInfoService campingInfoService;

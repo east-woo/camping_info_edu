@@ -1,6 +1,6 @@
 import { fetchCampingSiteByName, fetchCampingSiteDetails, fetchCampingSites, fetchSigList } from './api'; // API 호출 함수 가져오기
 import { displayCampingSites } from './overlay'; // 캠핑장 결과 표시 함수 가져오기
-import { ctpRvnLayer, map, removeCampingPop } from './map'; // 지도 관련 함수 및 레이어 가져오기
+import { ctpRvnLayer,sigLayer, map, removeCampingPop } from './map'; // 지도 관련 함수 및 레이어 가져오기
 import { fromLonLat } from "ol/proj"; // 좌표 변환 함수 가져오기
 
 // 이벤트 리스너 설정 함수
@@ -75,10 +75,10 @@ export function setupEventListeners() {
 
     sigLayerButton.addEventListener('click', () => {
         if (isSigLayerVisible) { // 레이어가 보이는 경우
-            map.removeLayer(ctpRvnLayer); // 레이어 제거
+            map.removeLayer(sigLayer); // 레이어 제거
             sigLayerButton.textContent = '시군구 레이어 켜기'; // 버튼 텍스트 변경
         } else { // 레이어가 숨겨진 경우
-            map.addLayer(ctpRvnLayer); // 레이어 추가
+            map.addLayer(sigLayer); // 레이어 추가
             sigLayerButton.textContent = '시군구 레이어 끄기'; // 버튼 텍스트 변경
         }
         isSigLayerVisible = !isSigLayerVisible; // 상태 토글

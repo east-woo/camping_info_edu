@@ -9,6 +9,6 @@
     <select id="findSigList" parameterType="java.lang.String" resultType="com.wavus.edu.gis.camping_info.domain.vo.SigVo">
         SELECT sig_cd, sig_eng_nm, sig_kor_nm
         FROM public.sig
-        WHERE ctprvn_cd = #{ctprvnCd}
+        WHERE substring(sig_cd, 1, 2) = #{ctprvnCd};
     </select>
 </mapper>

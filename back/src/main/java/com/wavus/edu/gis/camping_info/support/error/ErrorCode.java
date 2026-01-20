@@ -10,6 +10,7 @@ public enum ErrorCode {
 
     // 공통
     INVALID_INPUT("COMMON-001", "잘못된 요청입니다.", HttpStatus.BAD_REQUEST),
+    INVALID_PARAMETER_TYPE("COMMON-002", "요청 파라미터 형식이 올바르지 않습니다.", HttpStatus.BAD_REQUEST),
     INTERNAL_ERROR("COMMON-999", "서버 오류가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR),
 
     // 지역 코드

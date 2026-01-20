@@ -5,19 +5,23 @@ spring:
     ansi:
       enabled: ALWAYS
   datasource:
-    url: jdbc:postgresql://localhost:5432/camping_information_edu
+    url: jdbc:postgresql://localhost:5432/edu
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
     dialect: org.hibernate.dialect.PostgreSQLDialect
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
 
 mybatis:
   mapper-locations: classpath:mappers/*.xml
   configuration:
     map-underscore-to-camel-case: true
 server:
-  port: 8080
-
+  port: 8000
+  servlet:
+    context-path: /api
 
 logging:
   level:
